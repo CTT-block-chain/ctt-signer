@@ -41,7 +41,10 @@
   "engines": {
     "node": ">=10"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@polkadot/types": "2.10.2-18",
+    "@polkadot/keyring": "5.0.2-8"
+  },
   "devDependencies": {
     "@ava/typescript": "^1.1.1",
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
