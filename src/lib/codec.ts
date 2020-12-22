@@ -61,6 +61,78 @@ function processClientParamsCreateModel(params: any): Uint8Array {
   return s.toU8a();
 }
 
+function processClientParamsCreatePublishDoc(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    appId: u32,
+    documentId: Bytes,
+    modelId: Bytes,
+    productId: Bytes,
+    contentHash: U8aFixed,
+    paraIssueRate: u64,
+    selfIssueRate: u64,
+  }, params);
+
+  return s.toU8a();
+}
+
+function processClientParamsCreateIdentifyDoc(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    appId: u32,
+    documentId: Bytes,
+    productId: Bytes,
+    contentHash: U8aFixed,
+    goodsPrice: u64,
+    identRate: u64,
+    identConsistence: u64,
+    cartId: Bytes
+  }, params);
+
+  return s.toU8a();
+}
+
+function processClientParamsCreateTryDoc(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    appId: u32,
+    documentId: Bytes,
+    productId: Bytes,
+    contentHash: U8aFixed,
+    goodsPrice: u64,
+    offsetRate: u64,
+    trueRate: u64,
+    cartId: Bytes
+  }, params);
+
+  return s.toU8a();
+}
+
+function processClientParamsCreateChooseDoc(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    appId: u32,
+    documentId: Bytes,
+    modelId: Bytes,
+    productId: Bytes,
+    contentHash: U8aFixed,
+    sellCount: u64,
+    tryCount: u64
+  }, params);
+
+  return s.toU8a();
+}
+
+function processClientParamsCreateModelDoc(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    appId: u32,
+    documentId: Bytes,
+    modelId: Bytes,
+    productId: Bytes,
+    contentHash: U8aFixed,
+    producerCount: u64,
+    productCount: u64
+  }, params);
+
+  return s.toU8a();
+}
+
 export const encode = (structType: string, structObj: any): Uint8Array => {
   switch (structType) {
     case 'AppFinancedProposalParams':
@@ -72,9 +144,18 @@ export const encode = (structType: string, structObj: any): Uint8Array => {
     case 'AuthParamsCreateModel':
       return processAuthParamsCreateModel(structObj);
     case 'ClientParamsCreateModel':
-        return processClientParamsCreateModel(structObj);
+      return processClientParamsCreateModel(structObj);
+    case 'ClientParamsCreatePublishDoc':
+      return processClientParamsCreatePublishDoc(structObj);
+    case 'ClientParamsCreateIdentifyDoc':
+      return processClientParamsCreateIdentifyDoc(structObj);
+    case 'ClientParamsCreateTryDoc':
+      return processClientParamsCreateTryDoc(structObj);
+    case 'ClientParamsCreateChooseDoc':
+      return processClientParamsCreateChooseDoc(structObj);
+    case 'ClientParamsCreateModelDoc':
+      return processClientParamsCreateModelDoc(structObj);
     default:
       return null;
-      break;
   }
 }
