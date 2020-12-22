@@ -41,6 +41,26 @@ function processAddAppParams(params: any): Uint8Array {
   return s.toU8a();
 }
 
+function processAuthParamsCreateModel(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    modelId: Bytes
+  }, params);
+
+  return s.toU8a();
+}
+
+function processClientParamsCreateModel(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    appId: u32,
+    expertId: Bytes,
+    commodityName: Bytes,
+    commodityType: Bytes,
+    contentHash: U8aFixed,
+  }, params);
+
+  return s.toU8a();
+}
+
 export const encode = (structType: string, structObj: any): Uint8Array => {
   switch (structType) {
     case 'AppFinancedProposalParams':
@@ -49,6 +69,10 @@ export const encode = (structType: string, structObj: any): Uint8Array => {
       return processCommentDataParams(structObj);
     case 'AddAppParams':
       return processAddAppParams(structObj);
+    case 'AuthParamsCreateModel':
+      return processAuthParamsCreateModel(structObj);
+    case 'ClientParamsCreateModel':
+        return processClientParamsCreateModel(structObj);
     default:
       return null;
       break;
