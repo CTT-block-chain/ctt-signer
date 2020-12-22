@@ -54,7 +54,7 @@ function processClientParamsCreateModel(params: any): Uint8Array {
     appId: u32,
     expertId: Bytes,
     commodityName: Bytes,
-    commodityType: Bytes,
+    commodityType: u32,
     contentHash: U8aFixed,
   }, params);
 
