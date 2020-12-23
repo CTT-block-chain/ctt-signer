@@ -144,6 +144,26 @@ function processClientParamsCreateModelDoc(params: any): Uint8Array {
   return s.toU8a();
 }
 
+function processModelExpertAddMemberParams(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    appId: u32,
+    modelId: Bytes,
+    kptProfitRate: u32,
+  }, params);
+
+  return s.toU8a();
+}
+
+function processModelExpertDelMemberParams(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    appId: u32,
+    modelId: Bytes,
+    member: GenericAccountId,
+  }, params);
+
+  return s.toU8a();
+}
+
 export const encode = (structType: string, structObj: any): Uint8Array => {
   switch (structType) {
     case 'AppFinancedProposalParams':
@@ -168,6 +188,10 @@ export const encode = (structType: string, structObj: any): Uint8Array => {
       return processClientParamsCreateChooseDoc(structObj);
     case 'ClientParamsCreateModelDoc':
       return processClientParamsCreateModelDoc(structObj);
+    case 'ModelExpertAddMemberParams':
+      return processModelExpertAddMemberParams(structObj);
+    case 'ModelExpertDelMemberParams':
+      return processModelExpertDelMemberParams(structObj);
     default:
       return null;
   }
