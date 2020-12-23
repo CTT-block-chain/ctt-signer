@@ -16,6 +16,17 @@ function processAppFinancedProposalParams(params: any): Uint8Array {
   return s.toU8a();
 }
 
+function processAppFinancedUserExchangeParams(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    account: GenericAccountId,
+    appId: u32,
+    proposalId: Bytes,
+    exchangeAmount: u128,
+  }, params);
+
+  return s.toU8a();
+}
+
 function processCommentDataParams(params: any): Uint8Array {
   const s = new Struct(registry, {
     appId: u32,
@@ -137,6 +148,8 @@ export const encode = (structType: string, structObj: any): Uint8Array => {
   switch (structType) {
     case 'AppFinancedProposalParams':
       return processAppFinancedProposalParams(structObj);
+    case 'AppFinancedUserExchangeParams':
+      return processAppFinancedUserExchangeParams(structObj);
     case 'CommentData':
       return processCommentDataParams(structObj);
     case 'AddAppParams':
