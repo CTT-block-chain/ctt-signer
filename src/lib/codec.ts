@@ -27,6 +27,17 @@ function processAppFinancedUserExchangeParams(params: any): Uint8Array {
   return s.toU8a();
 }
 
+function processAppFinancedUserExchangeConfirmParams(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    account: GenericAccountId,
+		appId: u32,
+		payId: Bytes,
+		proposalId: Bytes,
+  }, params);
+
+  return s.toU8a();
+}
+
 function processCommentDataParams(params: any): Uint8Array {
   const s = new Struct(registry, {
     appId: u32,
@@ -164,12 +175,34 @@ function processModelExpertDelMemberParams(params: any): Uint8Array {
   return s.toU8a();
 }
 
+function processModelIncomeCollectingParam(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    appId: u32,
+    modelIds: 'Vec<Bytes>',
+    incomes: 'Vec<u64>',
+  }, params);
+
+  return s.toU8a();
+}
+
+function processAppKeyManageParams(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    admin: GenericAccountId,
+    appId: u32,
+    member: GenericAccountId
+  }, params);
+
+  return s.toU8a();
+}
+
 export const encode = (structType: string, structObj: any): Uint8Array => {
   switch (structType) {
     case 'AppFinancedProposalParams':
       return processAppFinancedProposalParams(structObj);
     case 'AppFinancedUserExchangeParams':
       return processAppFinancedUserExchangeParams(structObj);
+    case 'AppFinancedUserExchangeConfirmParams':
+      return processAppFinancedUserExchangeConfirmParams(structObj);
     case 'CommentData':
       return processCommentDataParams(structObj);
     case 'AddAppParams':
@@ -192,6 +225,10 @@ export const encode = (structType: string, structObj: any): Uint8Array => {
       return processModelExpertAddMemberParams(structObj);
     case 'ModelExpertDelMemberParams':
       return processModelExpertDelMemberParams(structObj);
+    case 'ModelIncomeCollectingParam':
+      return processModelIncomeCollectingParam(structObj);
+    case 'AppKeyManageParams':
+      return processAppKeyManageParams(structObj);
     default:
       return null;
   }
