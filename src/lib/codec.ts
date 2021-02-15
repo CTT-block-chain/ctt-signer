@@ -195,6 +195,28 @@ function processAppKeyManageParams(params: any): Uint8Array {
   return s.toU8a();
 }
 
+function processAppIncomeRedeemParams(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    account: GenericAccountId,
+    appId: u32,
+    cycle: u32,
+    exchangeAmount: u128
+  }, params);
+
+  return s.toU8a();
+}
+
+function processAppIncomeRedeemConfirmParams(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    account: GenericAccountId,
+    appId: u32,
+    payId: Bytes,
+    cycle: u32
+  }, params);
+
+  return s.toU8a();
+}
+
 export const encode = (structType: string, structObj: any): Uint8Array => {
   switch (structType) {
     case 'AppFinancedProposalParams':
@@ -229,6 +251,10 @@ export const encode = (structType: string, structObj: any): Uint8Array => {
       return processModelIncomeCollectingParam(structObj);
     case 'AppKeyManageParams':
       return processAppKeyManageParams(structObj);
+    case 'AppIncomeRedeemParams':
+      return processAppIncomeRedeemParams(structObj);
+    case 'AppIncomeRedeemConfirmParams':
+      return processAppIncomeRedeemConfirmParams(structObj);
     default:
       return null;
   }
