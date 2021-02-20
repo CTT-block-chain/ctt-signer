@@ -92,6 +92,7 @@ function processClientParamsCreatePublishDoc(params: any): Uint8Array {
     contentHash: U8aFixed,
     paraIssueRate: u64,
     selfIssueRate: u64,
+    attendRate: u64,
   }, params);
 
   return s.toU8a();
@@ -106,6 +107,7 @@ function processClientParamsCreateIdentifyDoc(params: any): Uint8Array {
     goodsPrice: u64,
     identRate: u64,
     identConsistence: u64,
+    sellerConsistence: u64,
     cartId: Bytes
   }, params);
 
@@ -121,6 +123,7 @@ function processClientParamsCreateTryDoc(params: any): Uint8Array {
     goodsPrice: u64,
     offsetRate: u64,
     trueRate: u64,
+    sellerConsistence: u64,
     cartId: Bytes
   }, params);
 
