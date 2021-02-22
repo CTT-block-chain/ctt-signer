@@ -220,6 +220,15 @@ function processAppIncomeRedeemConfirmParams(params: any): Uint8Array {
   return s.toU8a();
 }
 
+function processDisableModelParams(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    appId: u32,
+    modelId: Bytes,
+  }, params);
+
+  return s.toU8a();
+}
+
 export const encode = (structType: string, structObj: any): Uint8Array => {
   switch (structType) {
     case 'AppFinancedProposalParams':
@@ -258,6 +267,8 @@ export const encode = (structType: string, structObj: any): Uint8Array => {
       return processAppIncomeRedeemParams(structObj);
     case 'AppIncomeRedeemConfirmParams':
       return processAppIncomeRedeemConfirmParams(structObj);
+    case 'DisableModelParams':
+      return processDisableModelParams(structObj);
     default:
       return null;
   }
