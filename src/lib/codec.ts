@@ -92,7 +92,6 @@ function processClientParamsCreatePublishDoc(params: any): Uint8Array {
     contentHash: U8aFixed,
     paraIssueRate: u64,
     selfIssueRate: u64,
-    attendRate: u64,
   }, params);
 
   return s.toU8a();
