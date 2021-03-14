@@ -219,10 +219,19 @@ function processAppIncomeRedeemConfirmParams(params: any): Uint8Array {
   return s.toU8a();
 }
 
-function processDisableModelParams(params: any): Uint8Array {
+function processModelKeyParams(params: any): Uint8Array {
   const s = new Struct(registry, {
     appId: u32,
     modelId: Bytes,
+  }, params);
+
+  return s.toU8a();
+}
+
+function processFinanceMemberParams(params: any): Uint8Array {
+  const s = new Struct(registry, {
+    deposit: u128,
+    member: GenericAccountId,
   }, params);
 
   return s.toU8a();
@@ -266,8 +275,10 @@ export const encode = (structType: string, structObj: any): Uint8Array => {
       return processAppIncomeRedeemParams(structObj);
     case 'AppIncomeRedeemConfirmParams':
       return processAppIncomeRedeemConfirmParams(structObj);
-    case 'DisableModelParams':
-      return processDisableModelParams(structObj);
+    case 'ModelKeyParams':
+      return processModelKeyParams(structObj);
+    case 'FinanceMemberParams':
+      return processFinanceMemberParams(structObj);
     default:
       return null;
   }
